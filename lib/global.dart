@@ -12,6 +12,7 @@ class Global{
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    storageService = await StorageService().init();
+    storageService = await StorageService();
+    await storageService.init();
   }
 }

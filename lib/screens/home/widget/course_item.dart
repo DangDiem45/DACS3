@@ -88,7 +88,7 @@ class CourseItem extends StatelessWidget {
                                 ),
                                 Text(
                                   '${course.rate}',
-                                  style: const TextStyle(fontSize: 10),
+                                  style: const TextStyle(fontSize: 12),
                                 )
                               ],
                             ),
@@ -101,7 +101,8 @@ class CourseItem extends StatelessWidget {
                               ),
                             )
                           ],
-                        )
+                        ),
+                        SizedBox(height: 10,)
                       ],
                     ),
                   )

@@ -60,12 +60,16 @@ class LessonItem {
   String? description;
   String? thumbnail;
   int? id;
+  List<LessonVideoItem>? videos;
+
 
   LessonItem({
     this.name,
     this.description,
     this.thumbnail,
     this.id,
+    this.videos,
+
   });
 
   factory LessonItem.fromJson(Map<String, dynamic> json) =>
@@ -74,6 +78,10 @@ class LessonItem {
         description: json["description"],
         thumbnail: json["thumbnail"],
         id: json["id"],
+        videos: json["video"] == null
+            ? []
+            : List<LessonVideoItem>.from(
+            json["video"].map((x) => LessonVideoItem.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -81,6 +89,9 @@ class LessonItem {
     "description": description,
     "thumbnail": thumbnail,
     "id": id,
+    "video": videos == null
+        ? []
+        : List<dynamic>.from(videos!.map((x) => x.toJson())),
   };
 }
 
@@ -108,5 +119,23 @@ class LessonVideoItem {
     "thumbnail": thumbnail,
   };
 
+}
+class LessonVideo{
+  final List<LessonItem> lessonItem;
+  final Future<void>? initializeVideoPlayer;
+  final bool isPlay;
+  final String? url;
+  LessonVideo({this.lessonItem = const <LessonItem>[
+  ], this.initializeVideoPlayer, this.isPlay = false, this.url=""});
+
+  LessonVideo copyWith({List<LessonItem>? lessonItem, Future<void>? initializeVideoPlayer, bool? isPlay, String? url}){
+    return LessonVideo(lessonItem: lessonItem ?? this.lessonItem,
+        initializeVideoPlayer: initializeVideoPlayer ??
+            this.initializeVideoPlayer,
+        isPlay: isPlay ?? this.isPlay,
+        url: url??this.url
+    );
+  }
+  List<LessonItem> get data => lessonItem;
 }
 

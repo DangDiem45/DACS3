@@ -31,6 +31,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+        additionalParameters = ['--add-opens', 'java.base/java.lang.reflect=ALL-UNNAMED']
+    }
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).

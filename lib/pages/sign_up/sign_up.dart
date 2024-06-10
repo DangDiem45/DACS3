@@ -38,58 +38,66 @@ class _SignUpState extends ConsumerState<SignUp> {
       color: Colors.white,
       child: SafeArea(
         child: Scaffold(
-          appBar: buildAppbar(title: "Sign Up"),
           backgroundColor: Colors.white,
           body: loader==false?SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Center(
+                  child: Image.asset("assets/login.png",
+                    width: 150,),),
                 SizedBox(height: 15,),
-                Center(child: text14Normal(text: "Enter your details below & free sign up")),
-                SizedBox(height: 30,),
+
                 appTextField(
-                    text: "User name",
                     iconName: "assets/icons/user.png",
-                    hintText: "Enter your username",
+                    hintText: "Tên",
                     func: (value)=>ref.read(registerNotifierProvider.notifier).onUserNameChange(value),
 
                 ),
-                SizedBox(height: 15,),
                 appTextField(
-                    text: "Email",
                     iconName: "assets/icons/user.png",
-                    hintText: "Enter your email",
+                    hintText: "Email",
                     func: (value)=>ref.read(registerNotifierProvider.notifier).onUserEmailChange(value),
                 ),
-                SizedBox(height: 15,),
                 appTextField(
-                    text: "Password",
                     iconName: "assets/icons/lock.png",
-                    hintText: "Enter your password",
+                    hintText: "Mật khẩu",
                     obscureText: true,
                     func: (value)=>ref.read(registerNotifierProvider.notifier).onPasswordChange(value),
                 ),
-                SizedBox(height: 15,),
                 appTextField(
-                    text: "Confirm Password",
                     iconName: "assets/icons/lock.png",
-                    hintText: "Enter your Confirm Password",
+                    hintText: "Xác nhận mật khẩu",
                     obscureText: true,
                     func: (value)=>ref.read(registerNotifierProvider.notifier).onRePasswordChange(value),
                 ),
                 SizedBox(height: 15,),
                 Container(
                   margin: EdgeInsets.only(left: 25),
-                  child: text14Normal(text: "By creating an account you have to agree with our them & condication")
-                  ),
-                SizedBox(height: 40,),
-                Center(
                     child: appButton(
-                      buttonName: "Sign up",
+                        buttonName: "Đăng ký",
                         isLogin: true,
                         context: context,
-                      func: ()=> _controller.handleSignUp()
-                    )
+                        func: ()=> _controller.handleSignUp()
+                    ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 27),
+                      child: Text("Bạn đã có tài khoản", style: TextStyle(fontSize: 15),),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(right: 27),
+                        child: TextButton(
+                            onPressed: (){
+                              Navigator.pushNamed(context, "/login");
+                            },
+                            child: Text( "Đăng nhập", style: TextStyle(fontSize: 16),)
+                        )
+                    ),
+                  ],
+
                 ),
               ],
             ),

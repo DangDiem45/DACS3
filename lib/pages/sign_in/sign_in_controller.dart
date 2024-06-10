@@ -32,12 +32,12 @@ class SignInController{
     passwordController.text = password;
 
     if(state.email.isEmpty || email.isEmpty){
-      toastInfo("Your email is empty");
+      toastInfo("Email chưa đc nhập");
       return;
     }
 
     if((state.password.isEmpty)||password.isEmpty){
-      toastInfo("Your password is empty");
+      toastInfo("Mật khẩu chưa đc nhập");
       return;
     }
 
@@ -47,14 +47,13 @@ class SignInController{
       final credential = await SignInRepo.firebaseSignIn(email, password);
 
       if(credential.user==null){
-        toastInfo("User not found");
+        toastInfo("Tài khoản không tìm thấy");
       }
 
       if(!credential.user!.emailVerified){
-        toastInfo("You must verify your email address first !");
+        toastInfo("Bạn phải xác nhận email trước!");
         return;
       }
-
       var user = credential.user;
       if(user!=null){
         String? displayName = user.displayName;
@@ -70,17 +69,17 @@ class SignInController{
         loginRequestEntity.type = 1;
         asyncPostAllData(loginRequestEntity);
         if(kDebugMode){
-          print("user logged in");
+          print("Tài khoản đã đăng nhập");
         }
       }else{
-        toastInfo("Login error");
+        toastInfo("Lỗi Đăng nhập");
       }
 
     }on FirebaseAuthException catch(e){
       if(e.code=='user-not-found'){
-        toastInfo("User not found");
+        toastInfo("Tài khoản không được tìm thấy!");
       }else if(e.code=='wrong-password'){
-        toastInfo("Your password is wrong");
+        toastInfo("Mật khẩu không đúng!");
       }
       print(e.code);
     }catch(e){
@@ -112,7 +111,7 @@ class SignInController{
         }
       }
     }else{
-      toastInfo("Login error");
+      toastInfo("Lỗi đăng nhập");
     }
 
   }

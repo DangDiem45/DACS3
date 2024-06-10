@@ -44,7 +44,7 @@ class Header extends StatelessWidget {
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: FontFamily.dancing,
-                                color: Theme.of(context).textTheme.bodyText1!.color,
+                                color: Colors.black,
                               ),
                             ),
                           ],

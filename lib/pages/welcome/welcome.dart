@@ -46,22 +46,22 @@ class _WelcomeState extends State<Welcome> {
                     appOnboardingPage(
                       _controller,
                       imagePath: "assets/images/reading.png",
-                      title: "First See Learning",
-                      subTitle: "Forget about the paper, now learning all in one place",
+                      title: "Chào mừng bạn đến với ADIN STUDY",
+                      subTitle: "Quên đi tài lệu giấy khô khan, bạn có thể vừa xem vừa học.",
                       index: 1,context: context
                     ),
                     appOnboardingPage(
                       _controller,
                       imagePath: "assets/images/man.png",
-                      title: "Connect With Everyone",
-                      subTitle: "Always keep in touch with your tutor and friends. Let's get connected",
+                      title: "Kết nối với mọi người",
+                      subTitle: "Luôn giữ liên lạc với gia sư và bạn bè của bạn. Hãy kết nối cùng nhau.",
                       index: 2,context: context
                     ),
                     appOnboardingPage(
                       _controller,
                       imagePath: "assets/images/boy.png",
-                      title: "Always Fascinated Learning",
-                      subTitle: "Anywhere, anytime. The time is at your discretion. So study wherever you can",
+                      title: "Ứng dụng đem đến cho bạn sự hứng thú khi học tập.",
+                      subTitle: "Bất cứ đâu, bất cứ lúc nào. Thời gian là tùy theo ý bạn. Vì vậy, hãy học ở bất cứ đâu bạn có thể.",
                       index: 3,context: context
                     ),
                   ],

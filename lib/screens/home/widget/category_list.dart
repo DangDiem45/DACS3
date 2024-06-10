@@ -20,10 +20,11 @@ class CategoryList extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 5,
+          height: 10,
         ),
         SizedBox(
-          height: 25,
+          height: 20,
+          width: 400,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: CourseCategory.values.length,
@@ -48,7 +49,9 @@ class CategoryList extends StatelessWidget {
                   ),
                 );
               }),
-        )
+        ),
+        SizedBox(height: 15),
+
       ],
     );
   }

@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 class SignUpController{
   late WidgetRef ref;
@@ -21,29 +22,41 @@ class SignUpController{
 
     String password = state.password;
     String rePassword = state.rePassword;
+
+     bool isEmail(String em) {
+      String p =
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+      RegExp regExp = new RegExp(p);
+      return regExp.hasMatch(em);
+    }
     
     if(state.userName.isEmpty || name.isEmpty){
-      toastInfo("Your name is empty");
+      toastInfo("Tên đang rỗng ");
       return;
     }
 
     if(state.userName.length<6 || name.length<6){
-      toastInfo("Your name is too short");
+      toastInfo("Tên quá ngắn");
       return;
     }
 
-    if(state.email.isEmpty || email.isEmpty){
-      toastInfo("Your email is empty");
+    if( email!.isEmail){
+      toastInfo("Email sai định dạng");
+      return;
+
+    }
+    if(state.email.isEmpty || email.isEmpty ){
+      toastInfo("Email đang rỗng");
       return;
     }
 
     if((state.password.isEmpty!=state.rePassword.isEmpty)||password.isEmpty!=rePassword.isEmpty){
-      toastInfo("Your password is empty");
+      toastInfo("Mật khẩu đang rỗng");
       return;
     }
 
     if((state.password!=state.rePassword)||password!=rePassword){
-      toastInfo("Your password did not match");
+      toastInfo("Mật khẩu không giống nhau");
       return;
     }
 

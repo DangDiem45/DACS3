@@ -7,21 +7,30 @@ import 'package:dacs3_1/pages/sign_up/sign_up.dart';
 import 'package:dacs3_1/pages/welcome/welcome.dart';
 import 'package:dacs3_1/screens/details/course_details.dart';
 import 'package:dacs3_1/screens/details/lecture_details.dart';
+import 'package:dacs3_1/screens/home/course_home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart' as provider;
 
 import 'arguments/course_arguments.dart';
 import 'arguments/lecture_arguments.dart';
 import 'common/utils/route_names.dart';
+import 'data_provider/QuizProvider.dart' ;
 
 Future<void> main() async {
   await Global.init();
 
   runApp(
-    ProviderScope(
-      child: const MyApp(),
+    provider.MultiProvider(
+      providers: [
+        provider.ChangeNotifierProvider(create: (_) => QuizProvider()),
+        // Add other ChangeNotifierProviders if needed
+      ],
+      child: riverpod.ProviderScope(
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -29,33 +38,25 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      builder: (context, chlid) => MaterialApp(
+      builder: (context, child) => MaterialApp(
         title: 'Flutter Demo',
         theme: AppTheme.appThemeData,
         initialRoute: "/",
         routes: {
-          "/":(context)=>Welcome(),
-          // "signIn":(context)=> const SignIn(),
-          "/register":(context)=> const SignUp(),
+          "/": (context) => Welcome(),
+          // "/": (context) => CourseHome(),
+          "/register": (context) => const SignUp(),
+          "/login": (context) => const SignIn(),
         },
-        onGenerateRoute: (settings){
-          // if(settings.name == RouteNames.courseDetails){
-          //   final args = settings.arguments as CourseArgument;
-          //   return MaterialPageRoute(builder: (context) => CourseDetails(course: args.course));
-          // }
-          if(settings.name == RouteNames.lectureDetails){
-            final args = settings.arguments as LectureArgument;
-            return MaterialPageRoute(builder: (context) => LectureDetail(lecture: args.lecture,));
-          }
+        onGenerateRoute: (settings) {
+          // Define route handling logic here
         },
-        // home: Welcome(),
         debugShowCheckedModeBanner: false,
-      )
+      ),
     );
   }
 }

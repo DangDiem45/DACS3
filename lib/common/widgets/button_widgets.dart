@@ -22,8 +22,8 @@ Widget appButton({
       decoration: appBoxShadow(color: isLogin?AppColors.primaryElement:Colors.white),
       child: Center(
         child: text16Normal(
-          text: buttonName,
-          color: isLogin?AppColors.primaryBackground:AppColors.primaryText
+            text: buttonName,
+            color: isLogin?AppColors.primaryBackground:AppColors.primaryText
         ),
       ),
     ),

@@ -6,12 +6,15 @@ import 'package:dacs3_1/screens/home/widget/feature_course.dart';
 import 'package:dacs3_1/screens/home/widget/header.dart';
 import 'package:dacs3_1/screens/home/widget/lecture_list.dart';
 import 'package:dacs3_1/screens/home/widget/offer.dart';
+import 'package:dacs3_1/screens/home/widget/subject_list.dart';
 import 'package:dacs3_1/screens/home/widget/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../courses/my_course_list.dart';
-import '../search/explore.dart';
+import '../profile/view/profile.dart';
+import '../profile/widget/profile_widget.dart';
+import '../search/view/explore.dart';
 
 
 class CourseHome extends ConsumerStatefulWidget {
@@ -77,18 +80,18 @@ class _BottomOptionState extends ConsumerState<CourseHome> {
                 onPageIndexChange(2);
               },
             ),
+            // BottomBarItem(
+            //   isActive: activePageIndex == 3,
+            //   icon: "assets/icons/chat.svg",
+            //   onTap: () {
+            //     onPageIndexChange(3);
+            //   },
+            // ),
             BottomBarItem(
               isActive: activePageIndex == 3,
-              icon: "assets/icons/chat.svg",
-              onTap: () {
-                onPageIndexChange(3);
-              },
-            ),
-            BottomBarItem(
-              isActive: activePageIndex == 4,
               icon: "assets/icons/profile.svg",
               onTap: () {
-                onPageIndexChange(4);
+                onPageIndexChange(3);
               },
             ),
           ],
@@ -121,8 +124,8 @@ class _BottomOptionState extends ConsumerState<CourseHome> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Offers(),
-                      const LectureList(),
-                      const FeatureCourses(),
+                      SubjectList(),
+                      FeatureCourses(ref: ref,),
                       const CategoryList(),
                       CourseList(ref: ref,),
                     ],
@@ -141,17 +144,15 @@ class _BottomOptionState extends ConsumerState<CourseHome> {
         "icon": "assets/icons/play.svg",
         "page": MyCourseList(),
       },
-      {
-        "icon": "assets/icons/chat.svg",
-        "page": const Center(
-          child: Text("Chat"),
-        ),
-      },
+      // {
+      //   "icon": "assets/icons/chat.svg",
+      //   "page": const Center(
+      //     child: Text("Chat"),
+      //   ),
+      // },
       {
         "icon": "assets/icons/profile.svg",
-        "page": const Center(
-          child: Text("Profile"),
-        ),
+        "page": const Profile(),
       },
     ];
 
